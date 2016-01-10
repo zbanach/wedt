@@ -3,20 +3,21 @@ package pl.edu.pw.elka.wedt.model;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
- * Created by Artur Góralewski.
+ * Created by Artur GÃ³ralewski.
  */
 public class Opinion {
 
-    private ArrayList<Word> wordList;
+    private List<Word> wordList;
 
     public Opinion() {
         this.wordList = new ArrayList<>();
     }
 
-    public Opinion(ArrayList<Word> wordList) {
+    public Opinion(List<Word> wordList) {
         this.wordList = wordList;
     }
 
@@ -24,11 +25,15 @@ public class Opinion {
         wordList.add(word);
     }
 
-    public int getSentiment() {
-        int sum = 0;
+    public double getSentiment() {
+        double sum = 0;
         for (Word word : wordList){
             sum += word.getSentiment();
         }
         return sum;
+    }
+
+    public List<Word> getWordList() {
+        return wordList;
     }
 }

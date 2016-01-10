@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Artur Góralewski.
+ * Created by Artur GÃ³ralewski.
  */
 public class CsvReader {
 
@@ -46,7 +46,6 @@ public class CsvReader {
                     String[] tokens = line.split(DELIMITER);
                     String word = tokens[0];
                     Map<String, Object> attributes = new HashMap<>();
-                    int a = tokens.length;
                     for(int i = 1; i<tokens.length; i++){
                         if(isInteger(tokens[i])){
                             attributes.put(attrNames[i], Integer.parseInt(tokens[i]));

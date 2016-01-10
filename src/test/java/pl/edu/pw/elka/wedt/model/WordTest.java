@@ -11,14 +11,14 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Artur GÛralewski.
+ * Created by Artur G√≥ralewski.
  */
 public class WordTest {
 
     @Test
     public void testGetPOS() throws Exception {
         PolishStemmer polishStem = new PolishStemmer();
-        String toStemmed =  "pojecha≥";
+        String toStemmed =  "pojecha≈Ç";
         List<WordData> wordList = polishStem.lookup(toStemmed);
         WordData stemmed = wordList.isEmpty() ? null : wordList.get(0);
         System.out.println(wordList.isEmpty()+" "+stemmed);

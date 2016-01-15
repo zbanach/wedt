@@ -3,6 +3,8 @@ package pl.edu.pw.elka.wedt.model;
 import pl.edu.pw.elka.wedt.dataSources.CsvReader;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,10 +21,13 @@ public class SentimentAnalyzer {
     //<word, <sentimentScale{sth,binarySentiment,smallScaleSentiment,bigScaleSentiment,SO-PMI_score}, value>>
     Map<String, Map<String, Object>> sentimentDictionary;
 
+    OpinionPreparer opinionPreparer;
+
     public SentimentAnalyzer() {
         String sentimentDictionaryPath = Paths.get(".").toAbsolutePath().normalize().toString()+"\\src\\main\\resources\\slownikWydzwieku01.csv";
 
         this.sentimentDictionary = new CsvReader(sentimentDictionaryPath).makeSentimentDictionary();
+        this.opinionPreparer = new OpinionPreparer();
     }
 
     public double analyzeSentiment(final Opinion opinion, final String sentimentScale){
@@ -36,4 +41,11 @@ public class SentimentAnalyzer {
         return opinion.getSentiment();
     }
 
+    public double sumUpSentiment(List<String> unprocessedOpinions, final String sentimentScale){
+        double sentimentSum = 0;
+        for (String unprocessedOpinion : unprocessedOpinions){
+            sentimentSum += analyzeSentiment(opinionPreparer.prepareOpinion(unprocessedOpinion), sentimentScale);
+        }
+        return sentimentSum/unprocessedOpinions.size();
+    }
 }

@@ -7,6 +7,7 @@ import pl.edu.pw.elka.wedt.model.OpinionPreparer;
 import pl.edu.pw.elka.wedt.model.SentimentAnalyzer;
 import pl.edu.pw.elka.wedt.model.Word;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class App {
@@ -15,11 +16,15 @@ public class App {
 
         SentimentAnalyzer sentimentAnalyzer = new SentimentAnalyzer();
         OpinionPreparer opinionPreparer = new OpinionPreparer();
-        String opinionString = "Nie zabrakło oczywiście wpadek.\n"+
-                               "Największym zaskoczeniem okazał się dla nas strój Katarzyny Zielińskiej, której ewidentnie o coś chodziło, ale wciąż nie wiemy o co.";
+        List<String> unprocessedOpinions = new ArrayList<String>(){{
+            add("Nie zabrakło oczywiście wpadek.\n"+
+                    "Największym zaskoczeniem okazał się dla nas strój Katarzyny Zielińskiej, której ewidentnie o coś chodziło, ale wciąż nie wiemy o co.");
+            add("cześć świecie");
+            add("Lubię ten czeski samochód");
+        }};
 
-        Opinion opinion = opinionPreparer.prepareOpinion(opinionString);
-        System.out.println(sentimentAnalyzer.analyzeSentiment(opinion, SentimentAnalyzer.SMALL_SCALE_SENTIMENT));
+        System.out.println(sentimentAnalyzer.sumUpSentiment(unprocessedOpinions, SentimentAnalyzer.SMALL_SCALE_SENTIMENT));
+
 
 
 

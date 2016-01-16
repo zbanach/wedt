@@ -39,7 +39,7 @@ public class SentimentAnalyzer {
                 counter++;
             }
         }
-        double sentiment = opinion.getSentiment()/counter;
+        double sentiment = counter>0?opinion.getSentiment()/counter: 0;
         switch (sentimentScale){
             case SMALL_SCALE_SENTIMENT:
                 return sentiment*2 + 3;

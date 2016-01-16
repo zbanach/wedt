@@ -24,7 +24,7 @@ public class AnalyserAgentBehaviour extends Behaviour {
         MessageReceiver.listen(getAgent(), this).forMessageObject((object) -> {
             Product product = (Product) object;
             double sentiment = new SentimentAnalyzer().sumUpSentiment(
-                    product.getReviews(), SentimentAnalyzer.SMALL_SCALE_SENTIMENT);
+                    product.getReviews(), SentimentAnalyzer.BIG_SCALE_SENTIMENT);
 
             AnalyseResult analyseResult = new AnalyseResult();
             analyseResult.setSiteName(product.getSiteName());

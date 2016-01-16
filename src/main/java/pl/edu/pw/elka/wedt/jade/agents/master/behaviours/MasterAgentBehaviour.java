@@ -70,13 +70,21 @@ public class MasterAgentBehaviour extends Behaviour {
                 if (analyseResults.size() >= parserAgentNames.length - exceptionCount) {
 
                     float result = 0;
+                    int positive = 0, negative = 0;
+                    int numberOfReviews = 0;
                     for (AnalyseResult analyseResult : analyseResults) {
                         result += analyseResult.getSentiment();
+                        numberOfReviews += analyseResult.getReviewsCount();
+                        positive += analyseResult.getPositiveReviewsCount();
+                        negative += analyseResult.getNegativeReviewsCount();
                     }
                     result /= analyseResults.size();
+                    int positiveRatio = numberOfReviews > 0 ? Math.round(100*positive / numberOfReviews) : 0;
+                    int negativeRatio = numberOfReviews > 0 ? Math.round(100*negative / numberOfReviews) : 0;
 
                     System.out.println();
-                    System.out.println("Wydźwięk: " + (result > 0 ? result : "brak"));
+                    System.out.println("Ogólny wydźwięk: " + (result > 0 ? result : "brak"));
+                    System.out.printf("%d%% pozytywnych, %d%% negatywnych.", positiveRatio, negativeRatio);
                     System.out.println();
                     System.out.println("#################################################");
 

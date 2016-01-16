@@ -23,7 +23,8 @@ public class AnalyserAgentBehaviour extends Behaviour {
     public void action() {
         MessageReceiver.listen(getAgent(), this).forMessageObject((object) -> {
             Product product = (Product) object;
-            double sentiment = new SentimentAnalyzer().sumUpSentiment(
+            SentimentAnalyzer analyzer = new SentimentAnalyzer();
+            double sentiment = analyzer.sumUpSentiment(
                     product.getReviews(), SentimentAnalyzer.BIG_SCALE_SENTIMENT);
 
             AnalyseResult analyseResult = new AnalyseResult();
@@ -32,6 +33,8 @@ public class AnalyserAgentBehaviour extends Behaviour {
             analyseResult.setReviewsCount(product.getReviews().size());
             analyseResult.setRating(product.getRating());
             analyseResult.setSentiment(sentiment);
+            analyseResult.setPositiveReviewsCount(analyzer.getPositiveReviewsCount());
+            analyseResult.setNegativeReviewsCount(analyzer.getNegativeReviewsCount());
 
             getAgent().send(MessageBuilder.inform().toLocal(masterAgentName).withContent(analyseResult).build());
         });

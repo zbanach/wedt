@@ -20,8 +20,9 @@ public class SentimentAnalyzer {
 
     //<word, <sentimentScale{sth,binarySentiment,smallScaleSentiment,bigScaleSentiment,SO-PMI_score}, value>>
     Map<String, Map<String, Object>> sentimentDictionary;
-
     OpinionPreparer opinionPreparer;
+    private int positiveReviewsCount;
+    private int negativeReviewsCount;
 
     public SentimentAnalyzer() {
         String sentimentDictionaryPath = getClass().getResource("slownikWydzwieku01.csv").getPath();
@@ -56,9 +57,53 @@ public class SentimentAnalyzer {
 
     public double sumUpSentiment(List<String> unprocessedOpinions, final String sentimentScale){
         double sentimentSum = 0;
-        for (String unprocessedOpinion : unprocessedOpinions){
-            sentimentSum += analyzeSentiment(opinionPreparer.prepareOpinion(unprocessedOpinion), sentimentScale);
+
+        for (String unprocessedOpinion : unprocessedOpinions) {
+            double opinionSentiment = analyzeSentiment(opinionPreparer.prepareOpinion(unprocessedOpinion), sentimentScale);
+            if (isPositive(opinionSentiment, sentimentScale)) {
+                positiveReviewsCount++;
+            } else if (isNegative(opinionSentiment, sentimentScale)) {
+                negativeReviewsCount++;
+            }
+
+            sentimentSum += opinionSentiment;
         }
-        return sentimentSum/unprocessedOpinions.size();
+
+        return sentimentSum / unprocessedOpinions.size();
+    }
+
+    public int getPositiveReviewsCount() {
+        return positiveReviewsCount;
+    }
+
+    public int getNegativeReviewsCount() {
+        return negativeReviewsCount;
+    }
+
+
+    private boolean isPositive(double sentimentValue, String sentimentScale) {
+        switch (sentimentScale) {
+            case BINARY_SENTIMENT:
+                return sentimentValue > 0.5;
+            case SMALL_SCALE_SENTIMENT:
+            case BIG_SCALE_SENTIMENT:
+            case SO_PMI_SCORE:
+                return sentimentValue > 3.0;
+            default:
+                throw new IllegalArgumentException("wrong sentiment scale");
+        }
+    }
+
+    private boolean isNegative(double sentimentValue, String sentimentScale) {
+        switch (sentimentScale) {
+            case BINARY_SENTIMENT:
+                return sentimentValue < 0.5;
+            case SMALL_SCALE_SENTIMENT:
+            case BIG_SCALE_SENTIMENT:
+            case SO_PMI_SCORE:
+                return sentimentValue < 3.0;
+            default:
+                throw new IllegalArgumentException("wrong sentiment scale");
+        }
     }
 }

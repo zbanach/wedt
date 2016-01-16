@@ -16,8 +16,10 @@ public class AnalyseResult implements Serializable {
 
     private String siteName;
     private String productName;
-    private int reviewsCount;
     private float rating;
+    private int reviewsCount;
+    private int positiveReviewsCount;
+    private int negativeReviewsCount;
     private double sentiment;
 
 }

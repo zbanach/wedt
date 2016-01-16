@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -21,8 +23,17 @@ public class OpinionPreparer {
     public Speller speller;
     public DictionaryLookup stemmer; //zamiennie to samo - PolishStemmer polishStem = new PolishStemmer();
 
+    LinkedHashMap<String, String> conversion = new LinkedHashMap<String, String>(){{
+        put("lubie", "lubię");
+//        put("", "ﬁ");
+//        put("\\a", "ą");
+//        put("Barack", "George");
+//        put("_", "xx");
+    }};
+
+
     public OpinionPreparer() {
-        String polishDictionaryPath = Paths.get(".").toAbsolutePath().normalize().toString()+"\\src\\main\\java\\pl\\edu\\pw\\elka\\wedt\\pl.dict";
+        String polishDictionaryPath = Paths.get(".").toAbsolutePath().normalize().toString()+"/src/main/java/pl/edu/pw/elka/wedt/pl.dict";
 
         URL url;
         Dictionary polishDictionary = null;
@@ -49,11 +60,17 @@ public class OpinionPreparer {
     public Word createWord(final String word){
         String temp = word.toLowerCase(new Locale("pl"));
 
-        if(speller.isMisspelled(temp))
-            temp = speller.findReplacements(temp).get(0);
+        if(conversion.containsKey(temp))
+            temp = conversion.get(temp);
 
+        if(speller.isMisspelled(temp)) {
+            List<String> replacements = speller.findReplacements(temp);
+            if(!replacements.isEmpty())
+                temp = replacements.get(0);
+        }
         WordData wd = stemmer.lookup(temp).get(0);
 
+        System.out.println(wd);
         return new Word(wd, word); // hmmmm czy zapisaywac blednie napisane slowa?? czy nowe
     }
 }

@@ -24,7 +24,7 @@ public class SentimentAnalyzer {
     OpinionPreparer opinionPreparer;
 
     public SentimentAnalyzer() {
-        String sentimentDictionaryPath = Paths.get(".").toAbsolutePath().normalize().toString()+"\\src\\main\\resources\\slownikWydzwieku01.csv";
+        String sentimentDictionaryPath = Paths.get(".").toAbsolutePath().normalize().toString()+"/src/main/resources/slownikWydzwieku01.csv";
 
         this.sentimentDictionary = new CsvReader(sentimentDictionaryPath).makeSentimentDictionary();
         this.opinionPreparer = new OpinionPreparer();

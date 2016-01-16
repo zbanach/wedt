@@ -2,7 +2,7 @@ package pl.edu.pw.elka.wedt.jade.agents.parser.common;
 
 import jade.core.Agent;
 import pl.edu.pw.elka.wedt.jade.agents.parser.common.behaviours.SubPageAgentBehaviour;
-import pl.edu.pw.elka.wedt.model.Site;
+import pl.edu.pw.elka.wedt.parser.model.Site;
 
 /**
  * @author Rafał Wolny

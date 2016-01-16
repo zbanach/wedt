@@ -3,8 +3,8 @@ package pl.edu.pw.elka.wedt.jade.agents.analyser.behaviours;
 import jade.core.behaviours.Behaviour;
 import pl.edu.pw.elka.wedt.jade.messages.MessageBuilder;
 import pl.edu.pw.elka.wedt.jade.messages.MessageReceiver;
-import pl.edu.pw.elka.wedt.model.AnalyseResult;
-import pl.edu.pw.elka.wedt.model.Product;
+import pl.edu.pw.elka.wedt.jade.model.AnalyseResult;
+import pl.edu.pw.elka.wedt.parser.model.Product;
 import pl.edu.pw.elka.wedt.model.SentimentAnalyzer;
 
 /**

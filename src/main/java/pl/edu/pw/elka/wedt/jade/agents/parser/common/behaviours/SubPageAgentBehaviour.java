@@ -2,7 +2,7 @@ package pl.edu.pw.elka.wedt.jade.agents.parser.common.behaviours;
 
 import jade.core.behaviours.Behaviour;
 import pl.edu.pw.elka.wedt.jade.messages.MessageBuilder;
-import pl.edu.pw.elka.wedt.model.Site;
+import pl.edu.pw.elka.wedt.parser.model.Site;
 import pl.edu.pw.elka.wedt.parser.SiteParser;
 
 import java.io.IOException;

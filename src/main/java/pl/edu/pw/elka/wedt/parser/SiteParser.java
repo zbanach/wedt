@@ -3,8 +3,8 @@ package pl.edu.pw.elka.wedt.parser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import pl.edu.pw.elka.wedt.model.Product;
-import pl.edu.pw.elka.wedt.model.Site;
+import pl.edu.pw.elka.wedt.parser.model.Product;
+import pl.edu.pw.elka.wedt.parser.model.Site;
 
 import java.io.IOException;
 import java.util.ArrayList;

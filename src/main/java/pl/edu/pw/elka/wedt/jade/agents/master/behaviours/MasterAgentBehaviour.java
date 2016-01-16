@@ -3,8 +3,8 @@ package pl.edu.pw.elka.wedt.jade.agents.master.behaviours;
 import jade.core.behaviours.Behaviour;
 import pl.edu.pw.elka.wedt.jade.messages.MessageBuilder;
 import pl.edu.pw.elka.wedt.jade.messages.MessageReceiver;
-import pl.edu.pw.elka.wedt.model.AnalyseResult;
-import pl.edu.pw.elka.wedt.model.Site;
+import pl.edu.pw.elka.wedt.jade.model.AnalyseResult;
+import pl.edu.pw.elka.wedt.parser.model.Site;
 
 import java.util.ArrayList;
 import java.util.List;

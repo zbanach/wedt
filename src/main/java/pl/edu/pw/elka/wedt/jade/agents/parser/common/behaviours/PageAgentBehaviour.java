@@ -7,8 +7,8 @@ import jade.wrapper.StaleProxyException;
 import org.jsoup.nodes.Element;
 import pl.edu.pw.elka.wedt.jade.messages.MessageBuilder;
 import pl.edu.pw.elka.wedt.jade.messages.MessageReceiver;
-import pl.edu.pw.elka.wedt.model.Product;
-import pl.edu.pw.elka.wedt.model.Site;
+import pl.edu.pw.elka.wedt.parser.model.Product;
+import pl.edu.pw.elka.wedt.parser.model.Site;
 import pl.edu.pw.elka.wedt.parser.SiteParser;
 
 import java.io.IOException;
@@ -64,7 +64,6 @@ public class PageAgentBehaviour extends Behaviour {
                         getAgent().send(MessageBuilder.inform().toLocal(masterAgentName).withContent(site).build());
                         resetState();
                     }
-
                 });
                 break;
 

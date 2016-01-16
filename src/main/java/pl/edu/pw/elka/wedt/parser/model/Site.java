@@ -1,4 +1,4 @@
-package pl.edu.pw.elka.wedt.model;
+package pl.edu.pw.elka.wedt.parser.model;
 
 import lombok.Getter;
 

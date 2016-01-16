@@ -13,19 +13,12 @@ public class MessageBuilder {
 
     private final ACLMessage message;
 
-    private MessageBuilder(int performative) {
-        this.message = new ACLMessage(performative);
+    private MessageBuilder(int type) {
+        this.message = new ACLMessage(type);
     }
 
     public static MessageBuilder inform() {
         return new MessageBuilder(ACLMessage.INFORM);
-    }
-
-    public MessageBuilder to(AID... recievers) {
-        for (AID reciever : recievers) {
-            message.addReceiver(reciever);
-        }
-        return this;
     }
 
     public MessageBuilder toLocal(String... otherAgentNames) {
@@ -41,14 +34,6 @@ public class MessageBuilder {
         return this;
     }
 
-    public ACLMessage build() {
-        return message;
-    }
-
-    public MessageBuilder withContent(int i) {
-        return withContent(Integer.toString(i));
-    }
-
     public MessageBuilder withContent(Serializable object) {
         try {
             message.setContentObject(object);
@@ -56,5 +41,9 @@ public class MessageBuilder {
             e.printStackTrace();
         }
         return this;
+    }
+
+    public ACLMessage build() {
+        return message;
     }
 }

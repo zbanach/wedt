@@ -1,4 +1,4 @@
-package pl.edu.pw.elka.wedt.jade.agents.tools;
+package pl.edu.pw.elka.wedt.jade.tools;
 
 import jade.core.Agent;
 import jade.wrapper.AgentContainer;

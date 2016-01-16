@@ -25,10 +25,7 @@ public class OpinionPreparer {
 
     LinkedHashMap<String, String> conversion = new LinkedHashMap<String, String>(){{
         put("lubie", "lubię");
-//        put("", "ﬁ");
-//        put("\\a", "ą");
-//        put("Barack", "George");
-//        put("_", "xx");
+
     }};
 
 
@@ -64,7 +61,6 @@ public class OpinionPreparer {
         }
         WordData wd = stemmer.lookup(temp).get(0);
 
-        System.out.println(wd);
         return new Word(wd, word); // hmmmm czy zapisaywac blednie napisane slowa?? czy nowe
     }
 }

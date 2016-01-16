@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class SentimentAnalyzer {
 
-    public final static String STH = "sth"; //do not use
+//    public final static String STH = "sth"; //do not use
     public final static String BINARY_SENTIMENT = "binarySentiment";
     public final static String SMALL_SCALE_SENTIMENT = "smallScaleSentiment";
     public final static String BIG_SCALE_SENTIMENT = "bigScaleSentiment";
@@ -31,13 +31,27 @@ public class SentimentAnalyzer {
 
     public double analyzeSentiment(final Opinion opinion, final String sentimentScale){
         Map<String, Object> sentiments;
+        int counter = 0;
         for(Word word : opinion.getWordList()){
             sentiments = sentimentDictionary.get(word.getStem());
             if(sentiments != null) {
                 word.setSentiment(new Double(sentiments.get(sentimentScale).toString()));
+                counter++;
             }
         }
-        return opinion.getSentiment();
+        double sentiment = opinion.getSentiment()/counter;
+        switch (sentimentScale){
+            case SMALL_SCALE_SENTIMENT:
+                return sentiment*2 + 3;
+            case BIG_SCALE_SENTIMENT:
+                return sentiment + 3;
+            case BINARY_SENTIMENT:
+                return Math.floor(sentiment);
+            case SO_PMI_SCORE:
+                return sentiment/5 + 3;
+            default:
+                throw new IllegalArgumentException("wrong sentiment scale");
+        }
     }
 
     public double sumUpSentiment(List<String> unprocessedOpinions, final String sentimentScale){

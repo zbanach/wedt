@@ -59,7 +59,8 @@ public class SiteParser {
                 if (rating.isEmpty()) {
                     return Optional.empty();
                 }
-                product.setRating(Float.parseFloat(rating.first().getElementsByClass("bold").first().text()));
+                product.setRating(Float.parseFloat(rating.first().getElementsByClass("bold").first()
+                        .text().replace(",", ".")));
                 break;
         }
 

@@ -23,17 +23,18 @@ public class SiteParser {
         String siteUrl = site.getURL();
         String url, productUrl = "";
         Element productListPage, productPage = null;
-        Elements products, rating;
+        Elements productList, products, rating;
 
         switch (site) {
             case CENEO:
                 url = siteUrl + "/;szukaj-" + query;
                 productListPage = Jsoup.connect(url).get().body();
-                products = productListPage.getElementsByClass("cat-prod-row-body");
+                productList = productListPage.getElementsByClass("category-list-body");
+                products = productList.first().getElementsByClass("cat-prod-row-body");
                 if (products.isEmpty()) {
                     return Optional.empty();
                 }
-                productUrl = products.get(1).getElementsByTag("a").first().attr("href").split("#")[0];
+                productUrl = products.first().getElementsByTag("a").first().attr("href").split("#")[0];
 
                 productPage = Jsoup.connect(siteUrl + productUrl).get().body();
                 product.setName(productPage.getElementsByClass("product-name").first().text());
@@ -51,7 +52,7 @@ public class SiteParser {
                 if (products.isEmpty()) {
                     return Optional.empty();
                 }
-                productUrl = products.get(0).getElementsByTag("a").first().attr("href");
+                productUrl = products.first().getElementsByTag("a").first().attr("href");
 
                 productPage = Jsoup.connect(siteUrl + productUrl).get().body();
                 product.setName(productPage.getElementsByClass("center-top-bar").first().text());
@@ -85,31 +86,31 @@ public class SiteParser {
     }
 
     public static List<String> getReviewsFromSubPage(Site site, Integer subPageNumber, String productId) throws IOException {
-        List<String> reviews = new ArrayList<>();
-        Element reviewList;
-        Elements reviewElements;
+        List<String> reviewList = new ArrayList<>();
+        Element reviewPage;
+        Elements reviews;
         switch (site) {
             case CENEO:
-                reviewList = Jsoup.connect(site.getURL() + productId + "/opinie-" + subPageNumber).get().body();
+                reviewPage = Jsoup.connect(site.getURL() + productId + "/opinie-" + subPageNumber).get().body();
 
-                reviewElements = reviewList.getElementsByClass("product-review");
-                for (Element element : reviewElements) {
+                reviews = reviewPage.getElementsByClass("product-review");
+                for (Element element : reviews) {
                     String review = element.getElementsByClass("product-review-body").text();
-                    reviews.add(review);
+                    reviewList.add(review);
                 }
                 break;
 
             case EURO:
-                reviewList = Jsoup.connect(site.getURL() + productId + "#opinie").get().body();
+                reviewPage = Jsoup.connect(site.getURL() + productId + "#opinie").get().body();
 
-                reviewElements = reviewList.getElementsByClass("vote_box");
-                for (Element element : reviewElements) {
+                reviews = reviewPage.getElementsByClass("vote_box");
+                for (Element element : reviews) {
                     String review = element.getElementsByClass("fullOpinion").text();
-                    reviews.add(review);
+                    reviewList.add(review);
                 }
                 break;
         }
-        return reviews;
+        return reviewList;
     }
 
     // reszta do testownia..
@@ -142,7 +143,7 @@ public class SiteParser {
         try {
             Element productList = Jsoup.connect(URL).get().body();
 
-            String productId = productList.getElementsByClass("product-container").get(0).getElementsByTag("a").first().attr("href");
+            String productId = productList.getElementsByClass("product-container").first().getElementsByTag("a").first().attr("href");
 
             Element productPage = Jsoup.connect(siteUrl + productId).get().body();
 

@@ -33,19 +33,13 @@ public class OpinionPreparer {
 
 
     public OpinionPreparer() {
-        String polishDictionaryPath = Paths.get(".").toAbsolutePath().normalize().toString()+"/src/main/java/pl/edu/pw/elka/wedt/pl.dict";
-
-        URL url;
-        Dictionary polishDictionary = null;
         try {
-            url = new File(polishDictionaryPath).toURI().toURL();
-            polishDictionary = Dictionary.read(url);
+            Dictionary polishDictionary = Dictionary.read(getClass().getResource("pl.dict"));
+            this.speller = new Speller(polishDictionary);
+            this.stemmer = new DictionaryLookup(polishDictionary);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-
-        this.speller = new Speller(polishDictionary);
-        this.stemmer = new DictionaryLookup(polishDictionary);
     }
 
     public Opinion prepareOpinion(String opinion){

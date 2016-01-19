@@ -24,6 +24,5 @@ public class WordTest {
         System.out.println(wordList.isEmpty()+" "+stemmed);
         Word word = new Word(stemmed);
         assertEquals("verb", word.getPOS());
-
     }
 }

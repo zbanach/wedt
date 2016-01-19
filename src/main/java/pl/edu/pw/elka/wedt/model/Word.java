@@ -62,4 +62,5 @@ public class Word {
     public void setSentiment(double sentiment) {
         this.sentiment = sentiment;
     }
+
 }

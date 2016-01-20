@@ -24,7 +24,11 @@ public class App {
         }};
 
         System.out.println(sentimentAnalyzer.sumUpSentiment(unprocessedOpinions, SentimentAnalyzer.SMALL_SCALE_SENTIMENT));
-
+        System.out.println("___________________________");
+        System.out.println(sentimentAnalyzer.analyzeSentiment(opinionPreparer.prepareOpinion(unprocessedOpinions.get(2)), SentimentAnalyzer.BIG_SCALE_SENTIMENT));
+        System.out.println(sentimentAnalyzer.analyzeSentiment(opinionPreparer.prepareOpinion(unprocessedOpinions.get(2)), SentimentAnalyzer.SMALL_SCALE_SENTIMENT));
+        System.out.println(sentimentAnalyzer.analyzeSentiment(opinionPreparer.prepareOpinion(unprocessedOpinions.get(2)), SentimentAnalyzer.BINARY_SENTIMENT));
+        System.out.println(sentimentAnalyzer.analyzeSentiment(opinionPreparer.prepareOpinion(unprocessedOpinions.get(2)), SentimentAnalyzer.SO_PMI_SCORE));
 
 
 

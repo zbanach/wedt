@@ -24,7 +24,7 @@ public class OpinionPreparer {
     public DictionaryLookup stemmer; //zamiennie to samo - PolishStemmer polishStem = new PolishStemmer();
 
     LinkedHashMap<String, String> conversion = new LinkedHashMap<String, String>(){{
-        put("lubie", "lubię");
+        put("lubie", "lubię"); //lubie zamienia na Luba niby poprawnie ale w naszym przypadku potrzebne jest lubię
 
     }};
 
